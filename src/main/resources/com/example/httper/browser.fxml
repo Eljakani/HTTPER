@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.httper.Browser">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Session">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+            <TextField fx:id="urlTextField" layoutX="22.0" layoutY="32.0" prefHeight="25.0" prefWidth="581.0" promptText="http://" text="http://localhost:8080" />
+            <Button layoutX="497.0" layoutY="64.0" mnemonicParsing="false" onAction="#LoadFromUrl" prefHeight="25.0" prefWidth="105.0" styleClass="-flat-button" text="Go !">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="Fira Code Medium" size="12.0" />
+               </font>
+            </Button>
+            <Text fill="#f85a40" layoutX="705.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Httper v1.0" textAlignment="RIGHT">
+               <font>
+                  <Font name="Fira Code Bold" size="25.0" />
+               </font>
+            </Text>
+            <Text layoutX="21.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter URL here" />
+            <Text fill="#f85a40" layoutX="676.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Custom HTTP Parser" textAlignment="RIGHT">
+               <font>
+                  <Font name="Fira Code Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#797979" layoutX="808.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@Eljakani" textAlignment="RIGHT">
+               <font>
+                  <Font name="Fira Code Regular" size="12.0" />
+               </font>
+            </Text>
+            <GridPane layoutX="22.0" layoutY="180.0" prefHeight="427.0" prefWidth="861.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="425.66668701171875" minWidth="10.0" prefWidth="176.33338928222656" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="685.6666107177734" minWidth="10.0" prefWidth="685.6666107177734" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="136.3333740234375" minHeight="10.0" prefHeight="57.66668701171875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="261.6666259765625" minHeight="10.0" prefHeight="228.33331298828125" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Response overview" GridPane.valignment="TOP" />
+                  <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Response Header" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <Text layoutX="10.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Response Body" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                  <TextArea fx:id="ResponseOverview" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <TextArea fx:id="responseHeaders" layoutX="186.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="responseBody" layoutX="186.0" layoutY="79.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <Button fx:id="serverToggle" layoutX="800.0" layoutY="124.0" mnemonicParsing="false" onAction="#ServerStatusToggle" text="Start Server" />
+            <Text layoutX="676.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server Status" />
+            <Circle fx:id="serverStatus" fill="#ff1f1f" layoutX="866.0" layoutY="98.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
